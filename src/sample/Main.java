@@ -16,8 +16,16 @@ public class Main extends Application {
         primaryStage.show();
 
         MyFile myFile = new MyFile();
-        myFile.writeToFile("data.txt", "data_encrypt.txt");
-        System.out.println(Cipher.encrypt("Piatok je 15820", "ABCDE"));
+        Cipher cipher = new Cipher();
+
+        String string = "Kalendar";
+        String keyword = "KNIX";
+
+        String key = cipher.generateKey(string, keyword);
+        String ciphered_text = cipher.cipherText(string, key);
+
+        System.out.println(ciphered_text);
+
     }
 
     public static void main(String[] args) {
