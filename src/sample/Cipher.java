@@ -20,14 +20,14 @@ public class Cipher {
             while ((character = read.read()) != -1) {
 
                 if ((char) character >= 65 && (char) character <= 90) {
-                    char keyletter = (char) (character + ((key.charAt(keyPos)) - 65));
+                    char keyletter = (char) (character + ((cipherKey.charAt(keyPos)) - 97));
                     if ((int) keyletter > 90) {
                         keyletter -= 26;
                     }
                     sb.append(keyletter);
 
                 } else if ((char) character >= 97 && (char) character <= 122) {
-                    char keyletter = (char) (character + ((key.charAt(keyPos)) - 65));
+                    char keyletter = (char) (character + ((cipherKey.charAt(keyPos)) - 97));
                     if ((int) keyletter > 122) {
                         keyletter -= 26;
                     }
@@ -51,13 +51,67 @@ public class Cipher {
         }
         try {
 
-            BufferedWriter bw = new BufferedWriter(new FileWriter("data_encrypt.txt"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/data_encrypt.txt"));
             bw.write(sb.toString());
             bw.close();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return sb.toString();
+    }
+
+
+
+    public String decryption(String key, String location) {
+        if (key.equals("")) {
+            return "Please enter the password";
+        }
+        StringBuilder sb = new StringBuilder();
+        String keyword = key.toLowerCase();
+        int keyPos = 0;
+
+        try {
+            BufferedReader read = new BufferedReader(new InputStreamReader(new FileInputStream(location), StandardCharsets.UTF_8));
+            int character;
+            while ((character = read.read()) != -1) {
+                if (keyword.charAt(keyPos) < 97) {
+                    return "Wrong input";
+                }
+                if ((char) character >= 65 && (char) character <= 90) {
+                    char ch = (char) (character - ((keyword.charAt(keyPos)) - 97));
+                    if ((int) ch < 65) {
+                        ch += 26;
+                    }
+                    sb.append(ch);
+                } else if ((char) character >= 97 && (char) character <= 122) {
+                    char keyletter = (char) (character - ((keyword.charAt(keyPos)) - 97));
+                    if ((int) keyletter < 97) {
+                        keyletter += 26;
+                    }
+                    sb.append(keyletter);
+                } else if ((char) character == 32) {
+                    sb.append((char) character);
+                    keyPos--;
+                }
+                keyPos++;
+                if (keyPos >= keyword.length()) {
+                    keyPos = 0;
+                }
+            }
+            read.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/data_decrypt.txt"));
+            bw.write(sb.toString());
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return sb.toString();
     }
 }

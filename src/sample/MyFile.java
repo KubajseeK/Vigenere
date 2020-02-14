@@ -8,9 +8,11 @@ import java.util.Scanner;
 
 public class MyFile {
     private String source;
+    private String parent;
 
-    public MyFile(String source) {
+    public MyFile(String source, String parent) {
         this.source = source;
+        this.parent = parent;
     }
 
     public String readFile(String sourceFile) {

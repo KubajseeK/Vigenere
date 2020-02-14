@@ -15,9 +15,10 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
 
-        MyFile myFile = new MyFile("data.txt");
+        MyFile myFile = new MyFile("data.txt", "src");
 
-        System.out.println(new Cipher().encryption("data.txt", "Zebra"));
+        System.out.println(new Cipher().encryption("src/data.txt", "Zebra"));
+        System.out.println(new Cipher().decryption("Zebra", "src/data_encrypt.txt"));
 
 
     }
