@@ -18,8 +18,8 @@ public class Main extends Application {
         MyFile myFile = new MyFile();
         Cipher cipher = new Cipher();
 
-        String string = "Ahoj 2";
-        String keyword = "Ananas";
+        String string = "Computer programming";
+        String keyword = "Zebra";
 
         String key = cipher.generateKey(string, keyword);
         String ciphered_text = cipher.encryption(string, key);

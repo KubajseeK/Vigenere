@@ -26,6 +26,7 @@ public class Cipher {
         }
 
         String result = "";
+        message = message.toLowerCase();
 
 
         for (int i = 0, j = 0; i < message.length(); i++) {
@@ -43,7 +44,8 @@ public class Cipher {
 
 
             } else if (letter == 32 || (letter >= 48 && letter <= 57)) {
-                j--;
+
+
             }
 
         }
