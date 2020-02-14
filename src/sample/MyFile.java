@@ -7,7 +7,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class MyFile {
-        public String readFile(String sourceFile) {
+    private String source;
+
+    public MyFile(String source) {
+        this.source = source;
+    }
+
+    public String readFile(String sourceFile) {
             String data = "";
             try {
                 File myFile = new File(sourceFile);

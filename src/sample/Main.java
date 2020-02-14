@@ -15,16 +15,10 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
 
-        MyFile myFile = new MyFile();
-        Cipher cipher = new Cipher();
+        MyFile myFile = new MyFile("data.txt");
 
-        String string = "Computer programming";
-        String keyword = "Zebra";
+        System.out.println(new Cipher().encryption("data.txt", "Zebra"));
 
-        String key = cipher.generateKey(string, keyword);
-        String ciphered_text = cipher.encryption(string, key);
-
-        System.out.println(ciphered_text);
 
     }
 

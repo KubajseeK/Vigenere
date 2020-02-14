@@ -1,27 +1,68 @@
 package sample;
 
-import java.security.Key;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class Cipher {
-    public static String generateKey(String word, String key) {
-        int x = word.length();
+    public String encryption(String location, String key) {
 
-        for (int i = 0; ; i++) {
-            if (x == i){
-                i = 0;
+        StringBuilder sb = new StringBuilder();
+        String cipherKey = key.toLowerCase();
+        int keyPos = 0;
+
+        if (cipherKey.charAt(keyPos) < 65) {
+            return "Nope.";
+        }
+
+        try {
+            BufferedReader read = new BufferedReader(new InputStreamReader(new FileInputStream(location), StandardCharsets.UTF_8));
+            int character;
+            while ((character = read.read()) != -1) {
+
+                if ((char) character >= 65 && (char) character <= 90) {
+                    char keyletter = (char) (character + ((key.charAt(keyPos)) - 65));
+                    if ((int) keyletter > 90) {
+                        keyletter -= 26;
+                    }
+                    sb.append(keyletter);
+
+                } else if ((char) character >= 97 && (char) character <= 122) {
+                    char keyletter = (char) (character + ((key.charAt(keyPos)) - 65));
+                    if ((int) keyletter > 122) {
+                        keyletter -= 26;
+                    }
+                    sb.append(keyletter);
+
+                } else if ((char) character == 32) {
+                    sb.append((char) character);
+                    keyPos--;
+                }
+                keyPos++;
+
+                if (keyPos >= cipherKey.length()) {
+                    keyPos = 0;
+                }
             }
-            if (key.length() == word.length()) {
-                break;
-            }
-            key += (key.charAt(i));
+            read.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
 
         }
-        return key;
+        try {
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter("data_encrypt.txt"));
+            bw.write(sb.toString());
+            bw.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
     }
+}
 
-    public static String encryption(String message, String key) {
-
-        if (key.equals("")) {
+/*if (key.equals("")) {
             return "Enter key.";
         }
 
@@ -49,8 +90,8 @@ public class Cipher {
             }
 
         }
-        return result;
-        
+        return result;*/
+
 
 
         /*for (int i = 0; i < plaintext.length() ; i++) {
@@ -66,5 +107,3 @@ public class Cipher {
                 return null;
             }
         }*/
-    }
-}
