@@ -18,11 +18,11 @@ public class Main extends Application {
         MyFile myFile = new MyFile();
         Cipher cipher = new Cipher();
 
-        String string = "Kalendar";
-        String keyword = "KNIX";
+        String string = "Ahoj 2";
+        String keyword = "Ananas";
 
         String key = cipher.generateKey(string, keyword);
-        String ciphered_text = cipher.cipherText(string, key);
+        String ciphered_text = cipher.encryption(string, key);
 
         System.out.println(ciphered_text);
 
