@@ -4,7 +4,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class Cipher {
-    public String encryption(String location, String key) {
+    public String encryption(String location, String key) { //copied mine wasn't working as assigned. You can see previous tries at the bottom of the class.
 
         StringBuilder sb = new StringBuilder();
         String cipherKey = key.toLowerCase();
